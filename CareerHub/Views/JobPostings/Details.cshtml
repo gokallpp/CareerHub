@@ -1,0 +1,102 @@
+﻿@model CareerHub.Models.JobPosting
+
+@{
+    ViewData["Title"] = "İlan Detayı";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-5">
+
+                    <h1 class="fw-bold mb-3">
+                        @Model.Title
+                    </h1>
+
+                    @if (Model.Company != null)
+                    {
+                        <p class="text-muted fs-5">
+                            @Model.Company.Name
+                        </p>
+                    }
+
+                    <div class="mb-4">
+
+                        <span class="badge bg-primary">
+                            @Model.JobType
+                        </span>
+
+                        <span class="badge bg-secondary">
+                            @Model.WorkType
+                        </span>
+
+                        <span class="badge bg-success">
+                            @Model.Location
+                        </span>
+
+                    </div>
+
+                    <h4>İş Tanımı</h4>
+
+                    <p class="text-muted">
+                        @Model.Description
+                    </p>
+
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <strong>Konum</strong>
+                            <p>@Model.Location</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Maaş</strong>
+                            <p>
+                                @Model.Salary.ToString("N0") TL
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Çalışma Şekli</strong>
+                            <p>@Model.WorkType</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>İş Tipi</strong>
+                            <p>@Model.JobType</p>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-controller="JobPostings"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
+                            İlanlara Dön
+                        </a>
+
+                        <button class="btn btn-primary">
+                            Başvur
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

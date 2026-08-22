@@ -1,0 +1,207 @@
+﻿@model CareerHub.ViewModels.JobPostingCreateViewModel
+
+@{
+    ViewData["Title"] = "Yeni İş İlanı";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-5">
+
+                    <div class="mb-4">
+                        <h2 class="fw-bold">
+                            Yeni İş İlanı
+                        </h2>
+
+                        <p class="text-muted">
+                            Şirketiniz için yeni bir iş ilanı yayınlayın.
+                        </p>
+                    </div>
+
+                    <form asp-controller="Employer"
+                          asp-action="CreateJobPosting"
+                          method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="Title"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="Title"
+                                   class="form-control"
+                                   placeholder="Örn: Junior .NET Developer" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="JobType"
+                                       class="form-label">
+                                </label>
+
+                                <select asp-for="JobType"
+                                        class="form-select">
+
+                                    <option value="">
+                                        İş tipi seçiniz
+                                    </option>
+
+                                    <option value="Tam Zamanlı">
+                                        Tam Zamanlı
+                                    </option>
+
+                                    <option value="Yarı Zamanlı">
+                                        Yarı Zamanlı
+                                    </option>
+
+                                    <option value="Staj">
+                                        Staj
+                                    </option>
+
+                                    <option value="Freelance">
+                                        Freelance
+                                    </option>
+
+                                </select>
+
+                                <span asp-validation-for="JobType"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="WorkType"
+                                       class="form-label">
+                                </label>
+
+                                <select asp-for="WorkType"
+                                        class="form-select">
+
+                                    <option value="">
+                                        Çalışma şekli seçiniz
+                                    </option>
+
+                                    <option value="Ofis">
+                                        Ofis
+                                    </option>
+
+                                    <option value="Hibrit">
+                                        Hibrit
+                                    </option>
+
+                                    <option value="Uzaktan">
+                                        Uzaktan
+                                    </option>
+
+                                </select>
+
+                                <span asp-validation-for="WorkType"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="Location"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="Location"
+                                       class="form-control"
+                                       placeholder="Örn: Ankara" />
+
+                                <span asp-validation-for="Location"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="Salary"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="Salary"
+                                       class="form-control"
+                                       placeholder="Örn: 50000" />
+
+                                <span asp-validation-for="Salary"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label asp-for="Description"
+                                   class="form-label">
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      class="form-control"
+                                      rows="6"
+                                      placeholder="Pozisyon hakkında detayları yazınız..."></textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-controller="Employer"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary">
+
+                                Vazgeç
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+
+                                İlanı Yayınla
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

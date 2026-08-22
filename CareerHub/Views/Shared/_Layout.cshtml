@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CareerHub</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CareerHub.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg career-navbar">
+
+            <div class="container">
+
+                <!-- Logo -->
+                <a class="navbar-brand career-logo"
+                   asp-controller="JobPostings"
+                   asp-action="Index">
+                    Career<span>Hub</span>
+                </a>
+
+                <!-- Mobil Menü -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#careerNavbar"
+                        aria-controls="careerNavbar"
+                        aria-expanded="false"
+                        aria-label="Menüyü aç">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menü -->
+                <div class="collapse navbar-collapse" id="careerNavbar">
+
+                    <ul class="navbar-nav ms-4 gap-2">
+
+                        <li class="nav-item">
+                            <a class="nav-link career-nav-link"
+                               asp-controller="JobPostings"
+                               asp-action="Index">
+                                İş İlanları
+                            </a>
+                        </li>
+
+                        <a class="nav-link career-nav-link"
+                           asp-controller="Companies"
+                           asp-action="Index">
+                            Şirketler
+                        </a>
+
+                        <li class="nav-item">
+                            <a class="nav-link career-nav-link"
+                               href="#">
+                                Kariyer Rehberi
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole("Employer"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Employer"
+                                   asp-action="Index">
+
+                                    İşveren Paneli
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Companies"
+                                   asp-action="MyCompany">
+
+                                    Şirketim
+
+                                </a>
+
+                            </li>
+                        }
+
+                    </ul>
+
+                    <!-- Sağ taraf -->
+                    <div class="ms-auto d-flex align-items-center gap-2">
+
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <span class="navbar-text me-2">
+                                Merhaba, @User.Identity.Name
+                            </span>
+
+                            <form asp-controller="Account"
+                                  asp-action="Logout"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="btn btn-outline-danger">
+                                    Çıkış Yap
+                                </button>
+
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account"
+                               asp-action="Login"
+                               class="login-link">
+                                Giriş Yap
+                            </a>
+
+                            <a asp-controller="Account"
+                               asp-action="Register"
+                               class="register-button">
+                                Kayıt Ol
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - CareerHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

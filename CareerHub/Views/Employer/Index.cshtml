@@ -1,0 +1,225 @@
+﻿@model CareerHub.ViewModels.EmployerDashboardViewModel
+
+@{
+    ViewData["Title"] = "İşveren Paneli";
+}
+
+<div class="container py-5">
+
+    <!-- Başlık -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <div>
+            <h1 class="fw-bold mb-1">
+                İşveren Paneli
+            </h1>
+
+            <p class="text-muted mb-0">
+                @Model.Company.Name
+            </p>
+        </div>
+
+        <a asp-controller="Employer"
+           asp-action="CreateJobPosting"
+           class="btn btn-primary px-4">
+            + Yeni İş İlanı
+        </a>
+
+    </div>
+
+
+    <!-- İstatistikler -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Toplam İlan
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        @Model.TotalJobPostings
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Aktif İlan
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        @Model.ActiveJobPostings
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- İlanlar -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h4 class="fw-bold mb-0">
+                    İlanlarım
+                </h4>
+
+                <a asp-controller="Companies"
+                   asp-action="MyCompany"
+                   class="btn btn-outline-secondary btn-sm">
+                    Şirketimi Görüntüle
+                </a>
+
+            </div>
+
+
+            @if (Model.JobPostings.Count == 0)
+            {
+                <div class="text-center py-5">
+
+                    <h5>Henüz iş ilanınız yok.</h5>
+
+                    <p class="text-muted">
+                        İlk iş ilanınızı yayınlayarak başlayabilirsiniz.
+                    </p>
+
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+                        <thead>
+
+                            <tr>
+                                <th>İlan</th>
+                                <th>Konum</th>
+                                <th>Çalışma</th>
+                                <th>Durum</th>
+                                <th>Tarih</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var job in Model.JobPostings)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <strong>
+                                            @job.Title
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        @job.Location
+                                    </td>
+
+                                    <td>
+                                        @job.WorkType
+                                    </td>
+
+                                    <td>
+
+                                        @if (job.IsActive)
+                                        {
+                                            <span class="badge bg-success">
+                                                Aktif
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                Pasif
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td>
+                                        @job.CreatedDate.ToString("dd.MM.yyyy")
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <a asp-controller="JobPostings"
+                                           asp-action="Details"
+                                           asp-route-id="@job.Id"
+                                           class="btn btn-outline-primary btn-sm">
+                                            Görüntüle
+                                        </a>
+
+                                        <a asp-controller="Employer"
+                                           asp-action="EditJobPosting"
+                                           asp-route-id="@job.Id"
+                                           class="btn btn-outline-secondary btn-sm">
+                                            Düzenle
+                                        </a>
+
+                                        <form asp-controller="Employer"
+                                              asp-action="ToggleJobPostingStatus"
+                                              asp-route-id="@job.Id"
+                                              method="post"
+                                              class="d-inline">
+
+                                            @if (job.IsActive)
+                                            {
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm">
+                                                    İlanı Kapat
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit"
+                                                        class="btn btn-outline-success btn-sm">
+                                                    Tekrar Yayınla
+                                                </button>
+                                            }
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,60 @@
+﻿@model List<CareerHub.Models.Company>
+
+@{
+    ViewData["Title"] = "Şirketler";
+}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Şirketler</h1>
+
+        <p class="text-muted">
+            CareerHub'da iş ilanı yayınlayan şirketleri keşfet.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        @foreach (var company in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold">
+                            @company.Name
+                        </h4>
+
+                        <p class="text-muted">
+                            @company.Description
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(company.Website))
+                        {
+                            <a href="@company.Website"
+                               target="_blank"
+                               class="btn btn-outline-primary">
+                                Web Sitesi
+                            </a>
+                        }
+
+                        <a asp-controller="Companies"
+                           asp-action="Details"
+                           asp-route-id="@company.Id"
+                           class="btn btn-primary">
+                            Detay
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

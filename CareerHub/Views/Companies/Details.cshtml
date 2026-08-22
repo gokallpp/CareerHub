@@ -1,0 +1,102 @@
+﻿@model CareerHub.Models.Company
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+
+    <!-- Şirket bilgileri -->
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            @Model.Name
+        </h1>
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p class="text-muted fs-5">
+                @Model.Description
+            </p>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Website))
+        {
+            <a href="@Model.Website"
+               target="_blank"
+               class="btn btn-outline-primary">
+                Web Sitesine Git
+            </a>
+        }
+
+    </div>
+
+
+    <!-- İş ilanları -->
+    <div>
+
+        <h3 class="fw-bold mb-4">
+            Açık İş İlanları
+        </h3>
+
+        <div class="row g-4">
+
+            @foreach (var job in Model.JobPostings.Where(x => x.IsActive))
+            {
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="job-card">
+
+                        <div class="job-content">
+
+                            <h4 class="job-title">
+                                @job.Title
+                            </h4>
+
+                            <div class="job-meta">
+
+                                <span class="job-badge job-type">
+                                    @job.JobType
+                                </span>
+
+                                <span class="job-badge work-type">
+                                    @job.WorkType
+                                </span>
+
+                                <span class="job-badge location">
+                                    📍 @job.Location
+                                </span>
+
+                            </div>
+
+                            <p class="job-description">
+                                @job.Description
+                            </p>
+
+                        </div>
+
+                        <div class="job-footer">
+
+                            <span class="job-salary">
+                                @job.Salary.ToString("N0") TL
+                            </span>
+
+                            <a asp-controller="JobPostings"
+                               asp-action="Details"
+                               asp-route-id="@job.Id"
+                               class="detail-button">
+                                Detay →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

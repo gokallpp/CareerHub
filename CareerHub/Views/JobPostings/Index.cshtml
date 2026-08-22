@@ -1,0 +1,94 @@
+﻿@model List<CareerHub.Models.JobPosting>
+
+@{
+    ViewData["Title"] = "İş İlanları";
+}
+
+<div class="container py-5">
+
+    <!-- Hero -->
+    <div class="hero-section text-center mb-5">
+        <h1>Hayalindeki İşi Bul</h1>
+        <p>
+            Sana uygun iş ilanlarını keşfet ve kariyerine yön ver.
+        </p>
+    </div>
+
+    <!-- İlanlar -->
+    <div class="row g-4">
+
+        @foreach (var job in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <div class="job-card">
+
+                    <div class="job-content">
+
+                        <!-- Başlık -->
+                        <h2 class="job-title">
+                            @job.Title
+                        </h2>
+                        @if (job.Company != null)
+                        {
+                            <p class="text-muted mb-2">
+                                @job.Company.Name
+                            </p>
+                        }
+
+                        <!-- Bilgiler -->
+                        <div class="job-meta">
+
+                            <span class="job-badge job-type">
+                                @job.JobType
+                            </span>
+
+                            <span class="job-badge work-type">
+                                @job.WorkType
+                            </span>
+
+                            <span class="job-badge location">
+                                📍 @job.Location
+                            </span>
+
+                        </div>
+
+                        <!-- Açıklama -->
+                        <p class="job-description">
+                            @job.Description
+                        </p>
+
+                    </div>
+
+                    <!-- Alt bölüm -->
+                    <div class="job-footer">
+
+                        <span class="job-salary">
+                            @job.Salary.ToString("N0") TL
+                        </span>
+
+                        <a asp-controller="JobPostings"
+                           asp-action="Details"
+                           asp-route-id="@job.Id"
+                           class="detail-button">
+                            Detay
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- İlan sayısı -->
+    <div class="text-center mt-5">
+        <span class="job-count">
+            @Model.Count ilan bulundu.
+        </span>
+    </div>
+
+</div>
