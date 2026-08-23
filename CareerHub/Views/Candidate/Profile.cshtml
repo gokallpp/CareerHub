@@ -1,0 +1,209 @@
+﻿@model CareerHub.ViewModels.CandidateProfileViewModel
+
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-5">
+
+                    <div class="mb-4">
+
+                        <h2 class="fw-bold mb-1">
+                            Profilim
+                        </h2>
+
+                        <p class="text-muted">
+                            Kişisel bilgilerinizi buradan güncelleyebilirsiniz.
+                        </p>
+
+                    </div>
+
+                    @if (TempData["ProfileMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["ProfileMessage"]
+                        </div>
+                    }
+
+                    <form asp-controller="Candidate"
+                          asp-action="Profile"
+                          method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="FirstName"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="FirstName"
+                                       class="form-control" />
+
+                                <span asp-validation-for="FirstName"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="LastName"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="LastName"
+                                       class="form-control" />
+
+                                <span asp-validation-for="LastName"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label asp-for="Email"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control"
+                                   readonly />
+
+                            <small class="text-muted">
+                                E-posta adresi şu anda profil üzerinden değiştirilemez.
+                            </small>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="PhoneNumber"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="PhoneNumber"
+                                       class="form-control"
+                                       placeholder="05xx xxx xx xx" />
+
+                                <span asp-validation-for="PhoneNumber"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6 mb-3">
+
+                                <label asp-for="City"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="City"
+                                       class="form-control"
+                                       placeholder="Örn: Ankara" />
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label asp-for="AboutMe"
+                                   class="form-label">
+                            </label>
+
+                            <textarea asp-for="AboutMe"
+                                      class="form-control"
+                                      rows="5"
+                                      placeholder="Kendinizden, deneyimlerinizden ve hedeflerinizden kısaca bahsedin."></textarea>
+
+                            <span asp-validation-for="AboutMe"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                CV
+                            </label>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.CvFileName))
+                            {
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <span>
+                                        📄 @Model.CvFileName
+                                    </span>
+
+                                    <a asp-controller="Candidate"
+                                       asp-action="Cv"
+                                       class="btn btn-outline-primary btn-sm">
+                                        CV'yi Değiştir
+                                    </a>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+
+                                    <span class="text-muted">
+                                        Henüz CV yüklenmemiş.
+                                    </span>
+
+                                    <a asp-controller="Candidate"
+                                       asp-action="Cv"
+                                       class="btn btn-outline-primary btn-sm ms-2">
+                                        CV Yükle
+                                    </a>
+
+                                </div>
+                            }
+
+                        </div>
+
+
+                        <button type="submit"
+                                class="btn btn-primary px-4">
+
+                            Değişiklikleri Kaydet
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

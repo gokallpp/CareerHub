@@ -13,13 +13,16 @@ namespace CareerHub.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _environment;
 
         public EmployerController(
             ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment environment)
         {
             _context = context;
             _userManager = userManager;
+            _environment = environment;
         }
 
         public async Task<IActionResult> Index()
@@ -236,6 +239,144 @@ namespace CareerHub.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // Giriş yapan işverenin şirketine ait ilanlara yapılan başvuruları,
+        // aday ve iş ilanı bilgileriyle birlikte listeler.
+        public async Task<IActionResult> Applications()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var company = await _context.Companies
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.OwnerId == userId);
+
+            if (company == null)
+            {
+                return RedirectToAction(
+                    "Create",
+                    "Companies"
+                );
+            }
+
+            var applications = await _context.JobApplications
+                .Where(x => x.JobPosting.CompanyId == company.Id)
+                .Include(x => x.Candidate)
+                .Include(x => x.JobPosting)
+                .OrderByDescending(x => x.AppliedDate)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(applications);
+        }
+
+
+        // Giriş yapan işverenin kendi ilanına ait bir başvurunun
+        // durumunu güvenli bir şekilde günceller.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateApplicationStatus(
+            int id,
+            string status)
+        {
+            var allowedStatuses = new[]
+            {
+        "Pending",
+        "Reviewed",
+        "Interview",
+        "Accepted",
+        "Rejected"
+    };
+
+            if (!allowedStatuses.Contains(status))
+            {
+                return BadRequest();
+            }
+
+            var userId = _userManager.GetUserId(User);
+
+            var company = await _context.Companies
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.OwnerId == userId);
+
+            if (company == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.JobApplications
+                .Include(x => x.JobPosting)
+                .FirstOrDefaultAsync(x =>
+                    x.Id == id &&
+                    x.JobPosting.CompanyId == company.Id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            application.Status = status;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Applications));
+        }
+
+
+
+        // İşverenin yalnızca kendi şirketinin ilanına başvuran
+        // adayın CV dosyasını görüntülemesini sağlar.
+        public async Task<IActionResult> ViewCv(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var company = await _context.Companies
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.OwnerId == userId);
+
+            if (company == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.JobApplications
+                .Include(x => x.Candidate)
+                .Include(x => x.JobPosting)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x =>
+                    x.Id == id &&
+                    x.JobPosting.CompanyId == company.Id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            if (string.IsNullOrWhiteSpace(
+                application.Candidate.CvStoredFileName))
+            {
+                return NotFound();
+            }
+
+            var storedFileName = Path.GetFileName(
+                application.Candidate.CvStoredFileName);
+
+            var filePath = Path.Combine(
+                _environment.ContentRootPath,
+                "App_Data",
+                "CVs",
+                storedFileName
+            );
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            return PhysicalFile(
+                filePath,
+                "application/pdf"
+            );
         }
     }
 }

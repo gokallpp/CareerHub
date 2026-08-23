@@ -74,16 +74,52 @@
                             </li>
 
                             <li class="nav-item">
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Employer"
+                                   asp-action="Applications">
+                                    Başvurular
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
 
                                 <a class="nav-link career-nav-link"
                                    asp-controller="Companies"
                                    asp-action="MyCompany">
-
                                     Şirketim
+                                </a>
+                            </li>   
+
+                        }
+
+                        @if (User.IsInRole("Candidate"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Candidate"
+                                   asp-action="MyApplications">
+
+                                    Başvurularım
 
                                 </a>
-
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Candidate"
+                                   asp-action="Cv">
+                                    CV'm
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link career-nav-link"
+                                   asp-controller="Candidate"
+                                   asp-action="Profile">
+                                    Profilim
+                                </a>
+                            </li>                          
                         }
 
                     </ul>

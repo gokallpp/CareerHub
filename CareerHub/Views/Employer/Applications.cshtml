@@ -1,0 +1,208 @@
+﻿@model List<CareerHub.Models.JobApplication>
+
+@{
+    ViewData["Title"] = "Başvurular";
+}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+        <h1 class="fw-bold">
+            Gelen Başvurular
+        </h1>
+
+        <p class="text-muted">
+            İş ilanlarınıza yapılan başvuruları görüntüleyin.
+        </p>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center py-5">
+
+                <h4>
+                    Henüz başvuru bulunmuyor.
+                </h4>
+
+                <p class="text-muted mb-0">
+                    İlanlarınıza yapılan başvurular burada görünecek.
+                </p>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body p-4">
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Aday</th>
+                                <th>İlan</th>
+                                <th>Başvuru Tarihi</th>
+                                <th>Durum</th>
+                                <th>CV</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var application in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <strong>
+                                            @application.Candidate.FirstName
+                                            @application.Candidate.LastName
+                                        </strong>
+
+                                        <br />
+
+                                        <small class="text-muted">
+                                            @application.Candidate.Email
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        @application.JobPosting.Title
+                                    </td>
+
+                                    <td>
+                                        @(application.AppliedDate
+                                        .ToLocalTime()
+                                        .ToString("dd.MM.yyyy HH:mm"))
+                                    </td>
+
+                                    <td>
+
+                                        @if (application.Status == "Pending")
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                Bekliyor
+                                            </span>
+                                        }
+                                        else if (application.Status == "Reviewed")
+                                        {
+                                            <span class="badge bg-info">
+                                                İncelendi
+                                            </span>
+                                        }
+                                        else if (application.Status == "Interview")
+                                        {
+                                            <span class="badge bg-primary">
+                                                Görüşme
+                                            </span>
+                                        }
+                                        else if (application.Status == "Accepted")
+                                        {
+                                            <span class="badge bg-success">
+                                                Kabul Edildi
+                                            </span>
+                                        }
+                                        else if (application.Status == "Rejected")
+                                        {
+                                            <span class="badge bg-danger">
+                                                Reddedildi
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(
+                                            application.Candidate.CvStoredFileName))
+                                        {
+                                            <a asp-controller="Employer"
+                                               asp-action="ViewCv"
+                                               asp-route-id="@application.Id"
+                                               target="_blank"
+                                               class="btn btn-outline-primary btn-sm">
+
+                                                CV Görüntüle
+
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                CV yok
+                                            </span>
+                                        }
+                                    </td>
+
+
+
+                                    <td>
+                                        <form asp-controller="Employer"
+                                              asp-action="UpdateApplicationStatus"
+                                              method="post"
+                                              class="d-flex gap-2">
+
+                                            <input type="hidden"
+                                                   name="id"
+                                                   value="@application.Id" />
+
+                                            <select name="status"
+                                                    class="form-select form-select-sm">
+
+                                                <option value="Pending"
+                                                        selected="@(application.Status == "Pending")">
+                                                    Bekliyor
+                                                </option>
+
+                                                <option value="Reviewed"
+                                                        selected="@(application.Status == "Reviewed")">
+                                                    İncelendi
+                                                </option>
+
+                                                <option value="Interview"
+                                                        selected="@(application.Status == "Interview")">
+                                                    Görüşme
+                                                </option>
+
+                                                <option value="Accepted"
+                                                        selected="@(application.Status == "Accepted")">
+                                                    Kabul Et
+                                                </option>
+
+                                                <option value="Rejected"
+                                                        selected="@(application.Status == "Rejected")">
+                                                    Reddet
+                                                </option>
+
+                                            </select>
+
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-sm">
+                                                Güncelle
+                                            </button>
+
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

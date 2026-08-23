@@ -1,0 +1,91 @@
+﻿@model CareerHub.ViewModels.CvUploadViewModel
+
+@{
+    ViewData["Title"] = "CV Yönetimi";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-5">
+
+                    <h2 class="fw-bold mb-2">
+                        CV Yönetimi
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        İş başvurularında kullanmak için CV'nizi yükleyin.
+                    </p>
+
+                    @if (TempData["CvMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["CvMessage"]
+                        </div>
+                    }
+
+                    @if (ViewBag.CurrentCvFileName != null)
+                    {
+                        <div class="alert alert-light border">
+
+                            <strong>Mevcut CV:</strong>
+
+                            @ViewBag.CurrentCvFileName
+
+                        </div>
+                    }
+
+                    <form asp-controller="Candidate"
+                          asp-action="Cv"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label asp-for="CvFile"
+                                   class="form-label">
+                                CV Dosyası
+                            </label>
+
+                            <input asp-for="CvFile"
+                                   type="file"
+                                   accept=".pdf,application/pdf"
+                                   class="form-control" />
+
+                            <span asp-validation-for="CvFile"
+                                  class="text-danger">
+                            </span>
+
+                            <small class="text-muted">
+                                Yalnızca PDF. Maksimum 5 MB.
+                            </small>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            CV Yükle
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
