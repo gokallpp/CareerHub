@@ -130,9 +130,21 @@
                                        class="form-label">
                                 </label>
 
-                                <input asp-for="Location"
-                                       class="form-control"
-                                       placeholder="Örn: Ankara" />
+                                <select asp-for="Location"
+                                        class="form-select">
+
+                                    <option value="">
+                                        Şehir seçiniz
+                                    </option>
+
+                                    @foreach (var city in CareerHub.Helpers.TurkeyCities.All)
+                                    {
+                                        <option value="@city">
+                                            @city
+                                        </option>
+                                    }
+
+                                </select>
 
                                 <span asp-validation-for="Location"
                                       class="text-danger">

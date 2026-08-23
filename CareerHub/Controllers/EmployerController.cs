@@ -63,6 +63,7 @@ namespace CareerHub.Controllers
         }
 
 
+        
         [HttpGet]
         public async Task<IActionResult> CreateJobPosting()
         {
@@ -88,7 +89,7 @@ namespace CareerHub.Controllers
     JobPostingCreateViewModel model)
         {
             if (!ModelState.IsValid)
-            {
+            {           
                 return View(model);
             }
 
@@ -105,6 +106,8 @@ namespace CareerHub.Controllers
                 );
             }
 
+            
+
             var jobPosting = new JobPosting
             {
                 Title = model.Title,
@@ -117,7 +120,8 @@ namespace CareerHub.Controllers
                 CreatedDate = DateTime.UtcNow,
                 IsActive = true,
 
-                CompanyId = company.Id
+                CompanyId = company.Id,
+
             };
 
             _context.JobPostings.Add(jobPosting);

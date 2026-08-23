@@ -35,6 +35,6 @@ namespace CareerHub.Models
         [Column("company_id")]
         public int? CompanyId { get; set; }
 
-        public Company? Company { get; set; }
+        public Company? Company { get; set; } 
     }
 }

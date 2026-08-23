@@ -274,3 +274,208 @@ body {
 }
 
 
+/* =========================
+   Job Search
+   ========================= */
+
+.job-search-wrapper {
+    max-width: 1050px;
+    margin: 0 auto 45px;
+}
+
+.job-search-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Alanlar */
+
+.search-field {
+    min-width: 150px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.search-main {
+    flex: 1.4;
+}
+
+.search-icon {
+    font-size: 17px;
+    margin-right: 8px;
+    color: #64748b;
+}
+
+/* Input */
+
+.search-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+    .search-field input::placeholder {
+        color: #94a3b8;
+    }
+
+/* Select */
+
+.select-field {
+    padding: 0 5px;
+}
+
+.search-field select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #475569;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Ayırıcı çizgi */
+
+.search-divider {
+    width: 1px;
+    height: 28px;
+    background-color: #e2e8f0;
+}
+
+/* Ara butonu */
+
+.search-button {
+    height: 46px;
+    border: none;
+    border-radius: 11px;
+    padding: 0 25px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+    .search-button:hover {
+        background-color: #1d4ed8;
+    }
+
+
+/* Mobil */
+
+@media (max-width: 992px) {
+
+    .job-search-bar {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .search-field {
+        flex: 1 1 45%;
+    }
+
+    .search-button {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .search-divider {
+        display: none;
+    }
+
+    
+}
+
+@media (max-width: 576px) {
+
+    .search-field {
+        flex: 1 1 100%;
+    }
+
+    .job-search-bar {
+        padding: 10px;
+    }
+
+    
+}
+
+/* =========================
+   Filtreleri Temizle Butonu
+   ========================= */
+
+.clear-filter-button {
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    background-color: #ffffff;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+    .clear-filter-button:hover {
+        background-color: #fff1f2;
+        border-color: #fecdd3;
+        color: #e11d48;
+    }
+
+
+
+/* =========================
+   Pagination
+   ========================= */
+
+.pagination .page-link {
+    border: 1px solid #e2e8f0;
+    border-radius: 9px !important;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    background-color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+    .pagination .page-link:hover {
+        background-color: #eff6ff;
+        border-color: #bfdbfe;
+        color: #2563eb;
+    }
+
+.pagination .page-item.active .page-link {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f8fafc;
+    color: #cbd5e1;
+}
+
+
+
+
+

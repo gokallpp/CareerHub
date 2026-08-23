@@ -17,7 +17,7 @@ namespace CareerHub.Data
         public DbSet<Company> Companies { get; set; }
 
         public DbSet<JobApplication> JobApplications { get; set; }
-
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,15 +29,18 @@ namespace CareerHub.Data
                 .HasForeignKey<Company>(x => x.OwnerId)
                 .IsRequired(false);
 
+
             builder.Entity<JobApplication>()
                 .HasOne(x => x.Candidate)
                 .WithMany()
                 .HasForeignKey(x => x.CandidateId);
 
+
             builder.Entity<JobApplication>()
                 .HasOne(x => x.JobPosting)
                 .WithMany()
                 .HasForeignKey(x => x.JobPostingId);
+
 
             builder.Entity<JobApplication>()
                 .HasIndex(x => new

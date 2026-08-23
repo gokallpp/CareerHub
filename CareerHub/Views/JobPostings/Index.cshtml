@@ -1,4 +1,4 @@
-﻿@model List<CareerHub.Models.JobPosting>
+﻿@model CareerHub.ViewModels.JobPostingFilterViewModel
 
 @{
     ViewData["Title"] = "İş İlanları";
@@ -6,18 +6,99 @@
 
 <div class="container py-5">
 
-    <!-- Hero -->
+    @* <!-- Hero -->
     <div class="hero-section text-center mb-5">
         <h1>Hayalindeki İşi Bul</h1>
         <p>
             Sana uygun iş ilanlarını keşfet ve kariyerine yön ver.
         </p>
-    </div>
+    </div> *@
+
+    <form asp-controller="JobPostings"
+          asp-action="Index"
+          method="get"
+          class="job-search-wrapper">
+
+        <div class="job-search-bar">
+
+            <div class="search-field search-main">
+                <span class="search-icon">⌕</span>
+
+                <input asp-for="SearchTerm"
+                       placeholder="Pozisyon veya anahtar kelime" />
+            </div>
+
+            <div class="search-divider"></div>
+
+            <div class="search-field select-field">
+
+                <span class="search-icon">📍</span>
+
+                <select asp-for="Location">
+
+                    <option value="">
+                        Tüm Şehirler
+                    </option>
+
+                    @foreach (var city in CareerHub.Helpers.TurkeyCities.All)
+                    {
+                        <option value="@city">
+                            @city
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+            <div class="search-divider d-none d-lg-block"></div>
+
+            <div class="search-field select-field">
+                <select asp-for="JobType">
+                    <option value="">İş Tipi</option>
+                    <option value="Tam Zamanlı">Tam Zamanlı</option>
+                    <option value="Yarı Zamanlı">Yarı Zamanlı</option>
+                    <option value="Staj">Staj</option>
+                    <option value="Freelance">Freelance</option>
+                </select>
+            </div>
+
+            <div class="search-field select-field">
+                <select asp-for="WorkType">
+                    <option value="">Çalışma</option>
+                    <option value="Ofis">Ofis</option>
+                    <option value="Hibrit">Hibrit</option>
+                    <option value="Uzaktan">Uzaktan</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                    class="search-button">
+                Ara
+            </button>
+            
+
+            @if (!string.IsNullOrWhiteSpace(Model.SearchTerm) ||
+                 !string.IsNullOrWhiteSpace(Model.Location) ||
+                 !string.IsNullOrWhiteSpace(Model.JobType) ||
+                 !string.IsNullOrWhiteSpace(Model.WorkType))
+            {
+                <a asp-controller="JobPostings"
+                   asp-action="Index"
+                   class="clear-filter-button"
+                   title="Filtreleri temizle">
+                    ×
+                    <span>Temizle</span>
+                </a>
+            }
+        </div>
+
+    </form>
 
     <!-- İlanlar -->
     <div class="row g-4">
 
-        @foreach (var job in Model)
+        @foreach (var job in Model.JobPostings)
         {
             <div class="col-12 col-md-6 col-lg-4">
 
@@ -59,6 +140,7 @@
                         </p>
 
                     </div>
+                    
 
                     <!-- Alt bölüm -->
                     <div class="job-footer">
@@ -82,12 +164,84 @@
             </div>
         }
 
+         @* Pagination *@
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="mt-5"
+                 aria-label="İş ilanları sayfaları">
+
+                <ul class="pagination justify-content-center gap-1">
+
+                    <!-- Önceki -->
+                    <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+
+                        <a class="page-link"
+                           asp-controller="JobPostings"
+                           asp-action="Index"
+                           asp-route-page="@(Model.CurrentPage - 1)"
+                           asp-route-SearchTerm="@Model.SearchTerm"
+                           asp-route-Location="@Model.Location"
+                           asp-route-JobType="@Model.JobType"
+                           asp-route-WorkType="@Model.WorkType">
+
+                            ‹ Önceki
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- Sayfa numaraları -->
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                            <a class="page-link"
+                               asp-controller="JobPostings"
+                               asp-action="Index"
+                               asp-route-page="@i"
+                               asp-route-SearchTerm="@Model.SearchTerm"
+                               asp-route-Location="@Model.Location"
+                               asp-route-JobType="@Model.JobType"
+                               asp-route-WorkType="@Model.WorkType">
+
+                                @i
+
+                            </a>
+
+                        </li>
+                    }
+
+
+                    <!-- Sonraki -->
+                    <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+
+                        <a class="page-link"
+                           asp-controller="JobPostings"
+                           asp-action="Index"
+                           asp-route-page="@(Model.CurrentPage + 1)"
+                           asp-route-SearchTerm="@Model.SearchTerm"
+                           asp-route-Location="@Model.Location"
+                           asp-route-JobType="@Model.JobType"
+                           asp-route-WorkType="@Model.WorkType">
+
+                            Sonraki ›
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </nav>
+        }
+
     </div>
 
     <!-- İlan sayısı -->
     <div class="text-center mt-5">
         <span class="job-count">
-            @Model.Count ilan bulundu.
+            @Model.TotalJobCount ilan bulundu.
         </span>
     </div>
 

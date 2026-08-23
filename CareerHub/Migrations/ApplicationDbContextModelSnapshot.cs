@@ -135,7 +135,7 @@ namespace CareerHub.Migrations
                     b.HasIndex("OwnerId")
                         .IsUnique();
 
-                    b.ToTable("companies");
+                    b.ToTable("companies", (string)null);
                 });
 
             modelBuilder.Entity("CareerHub.Models.JobApplication", b =>
@@ -172,7 +172,7 @@ namespace CareerHub.Migrations
                     b.HasIndex("CandidateId", "JobPostingId")
                         .IsUnique();
 
-                    b.ToTable("job_applications");
+                    b.ToTable("job_applications", (string)null);
                 });
 
             modelBuilder.Entity("CareerHub.Models.JobPosting", b =>
@@ -229,7 +229,7 @@ namespace CareerHub.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("job_postings");
+                    b.ToTable("job_postings", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

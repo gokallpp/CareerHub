@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CareerHub.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CareerHub.ViewModels
 {
@@ -27,5 +28,6 @@ namespace CareerHub.ViewModels
         [Range(1, double.MaxValue, ErrorMessage = "Geçerli bir maaş giriniz.")]
         [Display(Name = "Maaş")]
         public decimal Salary { get; set; }
+
     }
 }
