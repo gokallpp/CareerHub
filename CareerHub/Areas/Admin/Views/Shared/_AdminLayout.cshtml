@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - CareerHub Admin
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+</head>
+
+<body class="admin-body">
+
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+
+            <div class="admin-sidebar-header">
+
+                <a asp-area="Admin"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="admin-brand">
+
+                    CareerHub
+
+                </a>
+
+                <span class="admin-brand-badge">
+                    ADMIN
+                </span>
+
+            </div>
+
+
+            <nav class="admin-menu">
+
+                <a asp-area="Admin"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="admin-menu-link">
+
+                    <span class="admin-menu-icon">
+                        ▦
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+
+                <a asp-area="Admin"
+                   asp-controller="Users"
+                   asp-action="Index"
+                   class="admin-menu-link">
+
+                    <span class="admin-menu-icon">
+                        ♙
+                    </span>
+
+                    Kullanıcılar
+
+                </a>
+
+
+                <!-- Sonraki adımlarda aktif edeceğiz -->
+
+                <span class="admin-menu-link admin-menu-disabled">
+
+                    <span class="admin-menu-icon">
+                        ◫
+                    </span>
+
+                    Şirketler
+
+                </span>
+
+
+                <span class="admin-menu-link admin-menu-disabled">
+
+                    <span class="admin-menu-icon">
+                        ▤
+                    </span>
+
+                    İlanlar
+
+                </span>
+
+
+                <span class="admin-menu-link admin-menu-disabled">
+
+                    <span class="admin-menu-icon">
+                        ✓
+                    </span>
+
+                    Başvurular
+
+                </span>
+
+            </nav>
+
+
+            <div class="admin-sidebar-footer">
+
+                <a asp-area=""
+                   asp-controller="JobPostings"
+                   asp-action="Index"
+                   class="admin-back-link">
+
+                    ← Siteye Dön
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Sağ taraf -->
+        <main class="admin-main">
+
+            <header class="admin-topbar">
+
+                <div>
+
+                    <span class="admin-topbar-title">
+                        Yönetim Paneli
+                    </span>
+
+                </div>
+
+
+                <div class="admin-topbar-user">
+
+                    <span class="admin-user-email">
+                        @User.Identity?.Name
+                    </span>
+
+                    <form asp-area=""
+                          asp-controller="Account"
+                          asp-action="Logout"
+                          method="post">
+
+                        <button type="submit"
+                                class="admin-logout-button">
+
+                            Çıkış
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </header>
+
+
+            <div class="admin-content">
+
+                @RenderBody()
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false)
+
+</body>
+
+</html>

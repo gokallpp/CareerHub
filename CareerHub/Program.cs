@@ -33,6 +33,10 @@ using (var scope = app.Services.CreateScope())
 {
     await IdentitySeed.SeedRolesAsync(
         scope.ServiceProvider);
+
+    await AdminSeed.SeedAsync(
+        scope.ServiceProvider,
+        builder.Configuration);
 }
 
 // Configure the HTTP request pipeline.
@@ -50,6 +54,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

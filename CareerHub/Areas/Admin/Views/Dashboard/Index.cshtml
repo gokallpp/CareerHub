@@ -1,0 +1,100 @@
+﻿@model AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+
+        <h1 class="fw-bold mb-1">
+            Admin Paneli
+        </h1>
+
+        <p class="text-muted">
+            CareerHub sistem özetini buradan takip edebilirsiniz.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-xl-4">
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-label">
+                    Toplam Aday
+                </div>
+
+                <div class="admin-stat-value">
+                    @Model.CandidateCount
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-xl-4">
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-label">
+                    Toplam İşveren
+                </div>
+
+                <div class="admin-stat-value">
+                    @Model.EmployerCount
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-xl-4">
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-label">
+                    Toplam Şirket
+                </div>
+
+                <div class="admin-stat-value">
+                    @Model.CompanyCount
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-xl-4">
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-label">
+                    Toplam İlan
+                </div>
+
+                <div class="admin-stat-value">
+                    @Model.JobPostingCount
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-xl-4">
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-label">
+                    Toplam Başvuru
+                </div>
+
+                <div class="admin-stat-value">
+                    @Model.ApplicationCount
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
