@@ -361,22 +361,6 @@ Bu proje geliştirilirken birçok ASP.NET Core konusu uygulamalı olarak kullan�
 
 ---
 
-# 🔮 Gelecekte Eklenebilecek Özellikler
-
-CareerHub'ın mevcut kapsamı tamamlanmış olsa da ileride aşağıdaki özellikler geliştirilebilir:
-
-⭐ İş ilanlarını favorilere ekleme  
-📧 E-posta doğrulama  
-🔑 Şifre sıfırlama  
-🔔 Bildirim sistemi  
-🏢 Şirket logosu yükleme  
-📨 Başvuru bildirimleri  
-🔍 Gelişmiş arama ve sıralama  
-📊 İşveren istatistikleri  
-📄 Başvuru sırasında CV snapshot sistemi  
-
----
-
 # 🎯 Projenin Amacı
 
 CareerHub, gerçek bir iş ilanı platformunda bulunabilecek temel süreçleri uygulayarak;
