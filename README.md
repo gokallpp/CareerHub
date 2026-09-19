@@ -333,57 +333,6 @@ CareerHub
 </p>
 ---
 
-# ⚙️ Kurulum
-
-### 1️⃣ Repository'yi klonlayın
-
-```bash
-git clone https://github.com/KULLANICI-ADIN/CareerHub.git
-```
-
-### 2️⃣ Proje klasörüne girin
-
-```bash
-cd CareerHub
-```
-
-### 3️⃣ PostgreSQL veritabanı oluşturun
-
-Örneğin:
-
-```text
-careerhubdb
-```
-
-### 4️⃣ Connection String'i yapılandırın
-
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=careerhubdb;Username=postgres;Password=YOUR_PASSWORD"
-  }
-}
-```
-
-> ⚠️ Gerçek veritabanı şifrenizi GitHub repository'sine göndermeyin.
-
-Development ortamında **User Secrets** veya environment variables kullanılması önerilir.
-
-### 5️⃣ Migration'ları uygulayın
-
-```bash
-dotnet ef database update
-```
-
-### 6️⃣ Projeyi çalıştırın
-
-```bash
-dotnet run
-```
-
-🎉 CareerHub artık çalışmaya hazır.
-
----
 
 # 📚 Bu Projede Neler Öğrendim?
 
