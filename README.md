@@ -302,12 +302,10 @@ CareerHub
 
 # 📸 Ekran Görüntüleri
 
-> Repository içerisine `docs/screenshots` klasörü oluşturup ekran görüntülerini buraya ekleyebilirsiniz.
-
 ## 💼 İş İlanları
 
 <p align="center">
-  <img src="docs/screenshots/job-postings.png" width="850">
+  <img src="Docs/screenshots/job-postings.png" width="900">
 </p>
 
 ---
@@ -315,15 +313,15 @@ CareerHub
 ## 🏢 İşveren Paneli
 
 <p align="center">
-  <img src="docs/screenshots/employer-dashboard.png" width="850">
+  <img src="Docs/screenshots/employer-dashboard.png" width="900">
 </p>
 
 ---
 
-## 👨‍💻 Aday Profili
+## 📩 Gelen Başvurular
 
 <p align="center">
-  <img src="docs/screenshots/candidate-profile.png" width="850">
+  <img src="Docs/screenshots/başvurular.png" width="900">
 </p>
 
 ---
@@ -331,9 +329,8 @@ CareerHub
 ## 🛡️ Admin Paneli
 
 <p align="center">
-  <img src="docs/screenshots/admin-dashboard.png" width="850">
+  <img src="Docs/screenshots/admin-dashboard.png" width="900">
 </p>
-
 ---
 
 # ⚙️ Kurulum
