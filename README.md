@@ -305,7 +305,7 @@ CareerHub
 ## 💼 İş İlanları
 
 <p align="center">
-  <img src="Docs/screenshots/job-postings.png" width="900">
+  <img src="CareerHub/Docs/screenshots/job-postings.png" width="900">
 </p>
 
 ---
@@ -313,7 +313,7 @@ CareerHub
 ## 🏢 İşveren Paneli
 
 <p align="center">
-  <img src="Docs/screenshots/employer-dashboard.png" width="900">
+  <img src="CareerHub/Docs/screenshots/employer-dashboard.png" width="900">
 </p>
 
 ---
@@ -321,7 +321,7 @@ CareerHub
 ## 📩 Gelen Başvurular
 
 <p align="center">
-  <img src="Docs/screenshots/başvurular.png" width="900">
+  <img src="CareerHub/Docs/screenshots/başvurular.png" width="900">
 </p>
 
 ---
@@ -329,7 +329,7 @@ CareerHub
 ## 🛡️ Admin Paneli
 
 <p align="center">
-  <img src="Docs/screenshots/admin-dashboard.png" width="900">
+  <img src="CareerHub/Docs/screenshots/admin-dashboard.png" width="900">
 </p>
 ---
 
