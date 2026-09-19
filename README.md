@@ -111,11 +111,13 @@ Başvuru yapabilmek için adayın sisteme CV yüklemiş olması gerekir.
 
 Başvurular aşağıdaki durumlara sahip olabilir:
 
-- `Pending`
-- `Reviewed`
-- `Interview`
-- `Accepted`
-- `Rejected`
+- `Beklemede`
+- `İncelendi`
+- `Mülakat`
+- `Kabul Edildi`
+- `Reddedildi`
+
+
 
 İşveren yalnızca kendi şirketine ait ilanların başvurularını görüntüleyebilir ve güncelleyebilir.
 
